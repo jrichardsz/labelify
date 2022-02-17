@@ -1,0 +1,21 @@
+{
+  "nodeboot": {
+    "database": {
+      "client": "mysql",
+      "connection": {
+        "host": "${LABELIFY_DATABASE_HOST}",
+        "user": "${LABELIFY_DATABASE_USER}",
+        "password": "${LABELIFY_DATABASE_PASSWORD}",
+        "database": "${LABELIFY_DATABASE_NAME}"
+      }
+    },
+    "session": {
+      "resave": true,
+      "saveUninitialized": true,
+      "cookie": {
+        "secure": false,
+        "maxAge": 36001000
+      }
+    }
+  }
+}
