@@ -2,7 +2,7 @@ const fs = require("fs")
 const path = require("path")
 
 @Route(name="Home")
-function Route1(){
+function HomeRoute(){
 
   @Autowire(name="dbSession")
   this.dbSession;
@@ -21,4 +21,4 @@ function Route1(){
   }
 }
 
-module.exports = Route1;
+module.exports = HomeRoute;

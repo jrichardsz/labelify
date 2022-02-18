@@ -2,10 +2,11 @@ const fs = require("fs")
 const path = require("path")
 const escape = require('escape-html');
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
 
 @Route(name = "Login")
 
-function Login() {
+function LoginRoute() {
 
   @Autowire(name = "securityDataSource")
   this.securityDataSource;
@@ -96,7 +97,8 @@ function Login() {
     var safeReceivedUuid = escape(req.body.uuid)
 
     var user = await this.securityDataSource.findUserByName(safeReceivedUsername);
-    if (user[0].password === safeReceivedPassword) {
+    var isItsPassword = await bcrypt.compare(safeReceivedPassword, user[0].password)
+    if (isItsPassword===true) {
       var userJob = await this.userJobsDataSource.findUserJob(user[0].id);
 
       if (userJob.length == 0) {
@@ -135,8 +137,7 @@ function Login() {
       let response = {
         code: 401,
         message: "User or password incorrect"
-      };
-      console.log(response);
+      };      
       return res.json(response);
     }
   }
@@ -153,4 +154,4 @@ function Login() {
   }
 }
 
-module.exports = Login;
+module.exports = LoginRoute;

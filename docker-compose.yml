@@ -27,7 +27,7 @@ services:
     image: labelify
     container_name: labelify
     ports:
-     - "8080:8080"
+     - "80:8080"
     environment:
       LABELIFY_DATABASE_HOST: host.docker.internal
       LABELIFY_DATABASE_USER: usr_labelify

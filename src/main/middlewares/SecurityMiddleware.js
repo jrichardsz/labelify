@@ -1,5 +1,7 @@
 @Middleware
 function SecurityMiddleware(){
+  
+  this.publicRoutes = ["/login", "/health", "/api"]
 
   this.dispatch = (req, res, next) => {
 
@@ -9,15 +11,17 @@ function SecurityMiddleware(){
       }
       next();
     }else{
-      if(req.url.startsWith("/login")){
-        return next();
+      let isPublic = false;
+      for(let partialRoute of this.publicRoutes){
+        if(req.url.startsWith(partialRoute)){
+          isPublic = true;
+          break;
+        }
       }
 
-      if(req.url.startsWith("/api")){
-        return next();
-      }
+      if(isPublic===true) return next();
+      else return res.redirect("/login");
 
-      res.redirect("/login");
     }
   }
 }

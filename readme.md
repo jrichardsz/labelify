@@ -2,8 +2,6 @@
 
 LabelImg is a graphical image annotation tool. Just like [labelImg](https://github.com/tzutalin/labelImg) but web and responsive to easily annotations with smartphones
 
-![logo](./src/logo/logo.png)
-
 ### Requirements
 
 - Node.js > 14.*
@@ -47,6 +45,19 @@ npm run start
 
 Complete details [here](https://github.com/jrichardsz/labelify/wiki/Launch-with-Docker)
 
+### Users
+
+admin password and demo data are created at first startup when tables don't exist. Search in the log for something like this:
+
+```
+--------------------------------------
+admin password: 0b85fb7a55094e
+uuid: 1d7024e08-e11f65978b69
+--------------------------------------
+```
+
+Use these values in the login.
+
 ### Usage
 
 Open your browser pointing at:
@@ -71,15 +82,9 @@ Press submit, the box coordinates will be sent to the database
 
 And then a new image will be loaded
 
-### Users
-
-admin with password 123456 and demo uuid 9fd1d411-35db-4c08-88c3-4001d18d3cb3
-
 ### Roadmap
 
 - [ ] unit test, coverage, badges
-- [ ] password hash
-- [ ] admin first password feature
 - [ ] user crud
 - [ ] images crud
 - [ ] annotation view

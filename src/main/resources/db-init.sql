@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `annotation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `annotation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `annotation_group_identifier` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image_id` int(11) NOT NULL,
+  `annotation_group_identifier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `x1` int(11) DEFAULT NULL,
   `y1` int(11) DEFAULT NULL,
   `x2` int(11) DEFAULT NULL,
@@ -41,16 +41,6 @@ CREATE TABLE `annotation` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `annotation`
---
-
-LOCK TABLES `annotation` WRITE;
-/*!40000 ALTER TABLE `annotation` DISABLE KEYS */;
-INSERT INTO `annotation` VALUES (1,1,'9fd1d411-35db-4c08-88c3-4001d18d3cb3',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-02-16'),(2,1,'9fd1d411-35db-4c08-88c3-4001d18d3cb3',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-02-16'),(3,1,'9fd1d411-35db-4c08-88c3-4001d18d3cb3',3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2022-02-17');
-/*!40000 ALTER TABLE `annotation` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `iam`
 --
 
@@ -63,18 +53,8 @@ CREATE TABLE `iam` (
   `resource` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `permission` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `iam`
---
-
-LOCK TABLES `iam` WRITE;
-/*!40000 ALTER TABLE `iam` DISABLE KEYS */;
-INSERT INTO `iam` VALUES (1,'admin','image','get-next'),(2,'user','image','get-next'),(3,'admin','annotation','create');
-/*!40000 ALTER TABLE `iam` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `image`
@@ -86,22 +66,12 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tag` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `file_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expected_classes` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `image`
---
-
-LOCK TABLES `image` WRITE;
-/*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'2022-01','https://drive.google.com/uc?id=1SSoRIEpMWrGZI4VaEgnTAQkpAEotiltv','carr01.jpg','car'),(2,'2022-01','https://drive.google.com/uc?id=12AI9Ltb-yKix4h3hKgUrzlGxSvRmlyZb','car002.png','car'),(3,'2022-01','https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg','car3.jpg','car');
-/*!40000 ALTER TABLE `image` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -113,22 +83,12 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_username_unique` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','123456','admin');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user_annotation_group`
@@ -144,16 +104,6 @@ CREATE TABLE `user_annotation_group` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_annotation_group`
---
-
-LOCK TABLES `user_annotation_group` WRITE;
-/*!40000 ALTER TABLE `user_annotation_group` DISABLE KEYS */;
-INSERT INTO `user_annotation_group` VALUES (1,'9fd1d411-35db-4c08-88c3-4001d18d3cb3');
-/*!40000 ALTER TABLE `user_annotation_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping routines for database 'nodeboot'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-17  1:31:38
+-- Dump completed on 2022-02-18  1:13:27
