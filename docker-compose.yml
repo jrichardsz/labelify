@@ -7,12 +7,10 @@ services:
     container_name: labelify_db
     ports:
      - "3306:3306"
-    volumes:
-     - ./src/main/resources:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_ROOT_PASSWORD: a2166128-1279-433c-88de-95bd70444ac3
       MYSQL_USER: usr_labelify
-      MYSQL_PASSWORD: changeme
+      MYSQL_PASSWORD: 679bbb63-29f8-4f90-b887-417104b6dd1b
       MYSQL_DATABASE: labelify
       TZ: America/Lima
     networks:
@@ -31,8 +29,11 @@ services:
     environment:
       LABELIFY_DATABASE_HOST: host.docker.internal
       LABELIFY_DATABASE_USER: usr_labelify
-      LABELIFY_DATABASE_PASSWORD: changeme
+      LABELIFY_DATABASE_PASSWORD: 679bbb63-29f8-4f90-b887-417104b6dd1b
       LABELIFY_DATABASE_NAME: labelify
+      LABELIFY_CREATE_TABLES: "true"
+      LABELIFY_ADMIN_PASSWORD: 7c30b42c-bb92-4f1d-83d4-ed5acc6f3b5c
+      LABELIFY_ANNOTATION_GROUP_IDENTIFIER: e15e3d2f-89fc-4170-9164-592c82f1891f
       TOKEN_SECRET: changeme
       TZ: America/Lima
     networks:

@@ -1,15 +1,20 @@
-const { v4: uuidv4 } = require('uuid');
+const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 @ServerInitializer
+
 function ServerInitializer() {
 
   @Autowire(name = "dbSession")
   this.dbSession;
 
   this.onBeforeLoad = () => {
+
     return new Promise(async (resolve, reject) => {
+      if (process.env.LABELIFY_CREATE_TABLES === "false") {
+        return resolve();
+      }
       console.log("Configuring database...");
       var existsUserTable = await this.dbSession.schema.hasTable('user');
       if (!existsUserTable) {
@@ -48,14 +53,19 @@ function ServerInitializer() {
           table.date("last_update");
         }).then(async () => {
 
-          var annotation_group_identifier = uuidv4();
-          var plainPassword = uuidv4();
-          var hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+          var annotation_group_identifier = process.env.LABELIFY_ANNOTATION_GROUP_IDENTIFIER || uuid.v4();
+          var plainPassword = process.env.LABELIFY_ADMIN_PASSWORD || uuid.v4();
+
           console.log("-------------------------------");
-          console.log("admin password: "+plainPassword);
-          console.log("uuid: "+annotation_group_identifier);
+          if (typeof process.env.LABELIFY_ADMIN_PASSWORD === 'undefined') {
+            console.log("admin password: " + plainPassword);
+          }
+          if (typeof process.env.LABELIFY_ANNOTATION_GROUP_IDENTIFIER === 'undefined') {
+            console.log("uuid: " + annotation_group_identifier);
+          }
           console.log("-------------------------------");
 
+          var hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
           await this.dbSession("user").insert([{
             username: "admin",
             password: hashedPassword,

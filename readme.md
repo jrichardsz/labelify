@@ -20,6 +20,7 @@ LabelImg is a graphical image annotation tool. Just like [labelImg](https://gith
 |LABELIFY_DATABASE_PASSWORD | ***** |  password related to the mysql user|
 |LABELIFY_DATABASE_PORT | 3306 | mysql port. Default is 3306|
 |LABELIFY_DATABASE_NAME | labelify | name of your mysql database|
+|LABELIFY_CREATE_TABLES | true | create tables at startup|
 |TOKEN_SECRET | ***** | secret for jwt generation|
 
 
