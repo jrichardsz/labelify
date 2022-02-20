@@ -48,6 +48,22 @@ function AnnotationDataSource() {
     });
   }
 
+  this.create = (userId, imageId, annotationGroupIdentifier) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.dbSession("image").insert({
+          user_id: userId,
+          image_id: imageId,
+          annotation_group_identifier: annotationGroupIdentifier
+        })
+        resolve("success");
+      } catch (err) {
+        console.log(err);
+        reject("Failed to find user by name");
+      }
+    });
+  }
+
 }
 
 module.exports = AnnotationDataSource;

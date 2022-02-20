@@ -46,6 +46,18 @@ function ImageDataSource() {
     });
   }
 
+  this.create = (image) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        var createResult = await this.dbSession("image").insert(image)
+        resolve(createResult);
+      } catch (err) {
+        console.log(err);
+        reject("Failed to create image");
+      }
+    });
+  }
+
 }
 
 module.exports = ImageDataSource;

@@ -1,1 +1,11 @@
-node_modules
+**/.DS_Store
+/node_modules
+/dist
+.nyc_output
+nohup.out
+!/coverage
+/coverage/*
+!/coverage/lines.svg
+!/coverage/statements.svg
+!/coverage/branches.svg
+!/coverage/functions.svg
