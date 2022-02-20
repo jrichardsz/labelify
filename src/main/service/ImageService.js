@@ -14,6 +14,7 @@ function ImageService() {
 
   this.bulkImageInsertFromGoogle = async (googleImageApiUrl, tag, expectedClasses, userId, annotationGroupIdentifier) => {
 
+    DataValidator.validate(googleImageApiUrl, "googleImageApiUrl");
     DataValidator.validate(tag, "tag");
     DataValidator.validate(expectedClasses, "expectedClasses");
     DataValidator.validate(userId, "userId");

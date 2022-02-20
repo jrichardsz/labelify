@@ -14,11 +14,20 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     var imageService = new ImageService();
     var message;
     try {
+      await imageService.bulkImageInsertFromGoogle();
+    } catch (e) {
+      message = e.message;
+    }
+    expect("REQUIRED_VALUE", "googleImageApiUrl is required").to.equal(message.code);
+
+    message = undefined;
+    try {
       await imageService.bulkImageInsertFromGoogle("url");
     } catch (e) {
       message = e.message;
     }
-    expect(true, "tag is required").to.equal(message.includes("is undefined"));
+    expect("REQUIRED_VALUE", "tag is required").to.equal(message.code);
+
 
     message = undefined;
     try {
@@ -26,8 +35,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     } catch (e) {
       message = e.message;
     }
-    expect(true, "expectedClasses is required").to.equal(message.includes("is undefined"));
-
+    expect("REQUIRED_VALUE", "expectedClasses is required").to.equal(message.code);
 
     message = undefined;
     try {
@@ -35,7 +43,15 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     } catch (e) {
       message = e.message;
     }
-    expect(true, "annotationGroupIdentifier is required").to.equal(message.includes("is undefined"));
+    expect("REQUIRED_VALUE", "userId is required").to.equal(message.code);
+
+    message = undefined;
+    try {
+      await imageService.bulkImageInsertFromGoogle("url", "tag", "expectedClasses", 5);
+    } catch (e) {
+      message = e.message;
+    }
+    expect("REQUIRED_VALUE", "annotationGroupIdentifier is required").to.equal(message.code);
 
   });
   it('should return exception on google api unknown error', async function() {
@@ -178,7 +194,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
           let _id = count;
           count++;
           resolve({
-            id:_id
+            id: _id
           })
         })
       }
