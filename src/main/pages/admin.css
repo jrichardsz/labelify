@@ -1,111 +1,77 @@
 <style>
 * {
   box-sizing: border-box;
-  text-align: center;
 }
 
-body {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-body > i > {
-  flex-grow: 0;
-}
-
-body > header > {
-  flex-grow: 1;
-}
-
-.logo > img {
-  width: 50px;
-}
-
-.navbar {
-  background-color: darkgray;
-  padding: 20px;
-  color: white;
+input[type=text], select, textarea {
   width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
 
-.hamburger {
-   display: flex;
-   flex-direction: row-reverse;
- }
-
- .social {
-
-  display: flex;
-  padding-top: 20px;
-  align-items: center;
-  justify-content: space-evenly;
-  border-top: 1px solid #8c8b8b
- }
-
-
-ul {
-  list-style: none;
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
 }
 
-
-li {
-  line-height: 5px;
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   float: right;
-  padding: 0 0 50px 0;
-  margin-right: 50px;
-  margin-top: -10px;
 }
 
-.product {
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  margin: 10px 30px;
+input[type=submit]:hover {
+  background-color: #45a049;
 }
 
-@media screen and (max-width: 700px) {
-   .logo {
-    float: left;
-   }
-
-   .menu {
-        display: none;
-      }
+.content {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-    .logo {
-      float: left;
-    }
-    /* On screens that are 500px wide or less */
-    @media screen and (max-width: 500px) {
-      .logo {
-        float: none;
-      }
-      .menu {
-        display: none;
-      }
-    }
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
 
-    @media screen and (min-width: 900px) {
-      .hamburger {
-        display: none;
-      }
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
 
-      .product {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid lightgray;
-        border-radius: 10px;
-        margin-left: 30px;
-        margin-right: 30px;
-        width: 50%;
-        text-align: center;
-      }
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-      main {
-        display: inline-flex;
-   }
-    }
+#loading {
+    background: url('https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+}
 
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
 </style>

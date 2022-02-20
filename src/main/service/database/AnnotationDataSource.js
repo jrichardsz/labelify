@@ -19,7 +19,7 @@ function AnnotationDataSource() {
         resolve(annotation);
       } catch (err) {
         console.log(err);
-        reject("Failed to find user by name");
+        reject("Failed to find annotation by name");
       }
     });
   }
@@ -43,7 +43,7 @@ function AnnotationDataSource() {
         resolve();
       } catch (err) {
         console.log(err);
-        reject("Failed to find user by name");
+        reject("Failed to update annotation");
       }
     });
   }
@@ -51,7 +51,7 @@ function AnnotationDataSource() {
   this.create = (userId, imageId, annotationGroupIdentifier) => {
     return new Promise(async (resolve, reject) => {
       try {
-        await this.dbSession("image").insert({
+        await this.dbSession("annotation").insert({
           user_id: userId,
           image_id: imageId,
           annotation_group_identifier: annotationGroupIdentifier
@@ -59,7 +59,7 @@ function AnnotationDataSource() {
         resolve("success");
       } catch (err) {
         console.log(err);
-        reject("Failed to find user by name");
+        reject(new Error("Failed to create annotation. "+err.message));
       }
     });
   }

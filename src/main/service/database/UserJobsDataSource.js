@@ -14,7 +14,7 @@ function UserJobsDataSource() {
         resolve(userJob);
       }catch(err){
         console.log(err);
-        reject("Failed to find user by name");
+        reject("Failed to find user annotation group");
       }
     });
   }

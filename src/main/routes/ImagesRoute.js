@@ -9,19 +9,6 @@ function ImagesRoute() {
   @Autowire(name = "securityDataSource")
   this.securityDataSource;
 
-  //DEPRECATED
-  @Get(path = "/api/image/next/2")
-  @Protected(permission = "image:get-next")
-  this.getNextImage = (req, res) => {
-    res.json({
-      code: 200,
-      message: "success",
-      content: {
-        url: "https://drive.google.com/uc?id=1SSoRIEpMWrGZI4VaEgnTAQkpAEotiltv"
-      },
-    });
-  }
-
   @Post(path = "/api/image/next")
   @Protected(permission = "image:get-next")
   this.getNextImage = async (req, res) => {

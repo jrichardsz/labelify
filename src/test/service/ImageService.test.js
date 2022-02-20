@@ -12,46 +12,46 @@ const ImageService = require("../../../src/main/service/ImageService.js");
 describe('ImageService: bulkImageInsertFromGoogle', function() {
   it('should return exception on missing required values', async function() {
     var imageService = new ImageService();
-    var message;
+    var err;
     try {
       await imageService.bulkImageInsertFromGoogle();
     } catch (e) {
-      message = e.message;
+      err = e;
     }
-    expect("REQUIRED_VALUE", "googleImageApiUrl is required").to.equal(message.code);
+    expect("REQUIRED_VALUE", "googleImageApiUrl is required").to.equal(err.code);
 
-    message = undefined;
+    err = undefined;
     try {
-      await imageService.bulkImageInsertFromGoogle("url");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl");
     } catch (e) {
-      message = e.message;
+      err = e;
     }
-    expect("REQUIRED_VALUE", "tag is required").to.equal(message.code);
+    expect("REQUIRED_VALUE", "tag is required").to.equal(err.code);
 
 
-    message = undefined;
+    err = undefined;
     try {
-      await imageService.bulkImageInsertFromGoogle("url", "tag");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag");
     } catch (e) {
-      message = e.message;
+      err = e;
     }
-    expect("REQUIRED_VALUE", "expectedClasses is required").to.equal(message.code);
+    expect("REQUIRED_VALUE", "expectedClasses is required").to.equal(err.code);
 
-    message = undefined;
+    err = undefined;
     try {
-      await imageService.bulkImageInsertFromGoogle("url", "tag", "expectedClasses");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses");
     } catch (e) {
-      message = e.message;
+      err = e;
     }
-    expect("REQUIRED_VALUE", "userId is required").to.equal(message.code);
+    expect("REQUIRED_VALUE", "userId is required").to.equal(err.code);
 
-    message = undefined;
+    err = undefined;
     try {
-      await imageService.bulkImageInsertFromGoogle("url", "tag", "expectedClasses", 5);
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5);
     } catch (e) {
-      message = e.message;
+      err = e;
     }
-    expect("REQUIRED_VALUE", "annotationGroupIdentifier is required").to.equal(message.code);
+    expect("REQUIRED_VALUE", "annotationGroupIdentifier is required").to.equal(err.code);
 
   });
   it('should return exception on google api unknown error', async function() {
@@ -68,7 +68,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     imageService.googleImageApiService = new googleImageApiService;
     var err;
     try {
-      await imageService.bulkImageInsertFromGoogle("foo");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5, "annotationGroupIdentifier");
     } catch (e) {
       err = e;
     }
@@ -92,7 +92,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     imageService.googleImageApiService = new googleImageApiService;
     var err;
     try {
-      await imageService.bulkImageInsertFromGoogle("foo");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5, "annotationGroupIdentifier");
     } catch (e) {
       err = e;
     }
@@ -116,7 +116,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     imageService.googleImageApiService = new googleImageApiServiceMock;
     var err;
     try {
-      await imageService.bulkImageInsertFromGoogle("foo");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5, "annotationGroupIdentifier");
     } catch (e) {
       err = e;
     }
@@ -158,7 +158,7 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     imageService.imageDataSource = new imageDataSourceMock;
     var err;
     try {
-      await imageService.bulkImageInsertFromGoogle("foo");
+      await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5, "annotationGroupIdentifier");
     } catch (e) {
       err = e;
     }
@@ -193,9 +193,15 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
         return new Promise((resolve, reject) => {
           let _id = count;
           count++;
-          resolve({
-            id: _id
-          })
+          resolve([_id])
+        })
+      }
+    }
+
+    function annotationDataSourceMock() {
+      this.create = (annotation) => {
+        return new Promise((resolve, reject) => {
+          resolve()
         })
       }
     }
@@ -203,7 +209,8 @@ describe('ImageService: bulkImageInsertFromGoogle', function() {
     var imageService = new ImageService();
     imageService.googleImageApiService = new googleImageApiServiceMock;
     imageService.imageDataSource = new imageDataSourceMock;
-    var ids = await imageService.bulkImageInsertFromGoogle("foo");
+    imageService.annotationDataSource = new annotationDataSourceMock;
+    var ids = await imageService.bulkImageInsertFromGoogle("googleImageApiUrl", "tag", "expectedClasses", 5, "annotationGroupIdentifier");
     expect(3).to.equal(ids.length);
     expect(1).to.equal(ids[0]);
     expect(2).to.equal(ids[1]);

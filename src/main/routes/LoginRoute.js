@@ -121,7 +121,8 @@ function LoginRoute() {
           code: 200,
           message: "success",
           content: {
-            access_token: generateJwtToken(payload, process.env.TOKEN_SECRET, "3600s")
+            access_token: generateJwtToken(payload, process.env.TOKEN_SECRET, "3600s"),
+            role: user[0].role
           }
         };
         return res.json(response);
@@ -137,7 +138,7 @@ function LoginRoute() {
       let response = {
         code: 401,
         message: "User or password incorrect"
-      };      
+      };
       return res.json(response);
     }
   }

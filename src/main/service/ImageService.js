@@ -1,6 +1,6 @@
 const DataValidator = require("../common/DataValidator.js");
 
-@Service(name = "ImageService")
+@Service
 function ImageService() {
 
   @Autowire(name = "imageDataSource")
@@ -16,29 +16,32 @@ function ImageService() {
 
     DataValidator.validate(googleImageApiUrl, "googleImageApiUrl");
     DataValidator.validate(tag, "tag");
-    DataValidator.validate(expectedClasses, "expectedClasses");
+    DataValidator.validate(expectedClasses, "expectedClasses" );
     DataValidator.validate(userId, "userId");
-    DataValidator.validate(annotation_group_identifier, "annotation_group_identifier");
+    DataValidator.validate(annotationGroupIdentifier, "annotationGroupIdentifier");
 
     var imagesApiResponse = await this.googleImageApiService.getImages(googleImageApiUrl);
     if(imagesApiResponse.code!=200){
-      throw new Error("google image api returns an error: "+imagesApiResponse);
+      throw new Error("google image api returns an error: "+JSON.stringify(imagesApiResponse));
     }
 
     if(imagesApiResponse.content.length==0){
-      throw new Error("google image api returns zero images");
+      throw new Error("google image api returns zero images: "+JSON.stringify(imagesApiResponse));
     }
 
     var ids = [];
     for(image of imagesApiResponse.content){
+      console.log("inserting: "+image.name);
       let imageCreationResult = await this.imageDataSource.create({
         tag:tag,
-        url:"https://drive.google.com/uc?id="+imageId.id,
+        url:"https://drive.google.com/uc?id="+image.id,
         file_name:image.name,
         expected_classes:expectedClasses
       });
-      await this.annotationDataSource.create(userId, imageCreationResult, annotationGroupIdentifier);
-      ids.push(imageCreationResult.id);
+
+      console.log("registering: "+imageCreationResult[0]);
+      await this.annotationDataSource.create(userId, imageCreationResult[0], annotationGroupIdentifier);
+      ids.push(imageCreationResult[0]);
     }
     return ids;
 

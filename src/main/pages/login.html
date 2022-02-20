@@ -7,7 +7,7 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  <title>Login landing page</title>
+  <title>Labelify</title>
   <style>
     * {
       margin: 0;
@@ -205,8 +205,12 @@
         .then(function(jsonResponse) {
           console.log(jsonResponse);
           if(jsonResponse.code == 200 && typeof jsonResponse.content.access_token !== 'undefined'){
-            window.location.href = '/home?uuid='+encodeURI(request.uuid);
             window.localStorage.setItem("access_token", jsonResponse.content.access_token);
+            if(jsonResponse.content.role === "admin"){
+              window.location.href = '/admin?page=add_images';
+            }else{
+              window.location.href = '/home?uuid='+encodeURI(request.uuid);
+            }
           }else{
             document.getElementById("ui_login_message").innerHTML = jsonResponse.message;
           }

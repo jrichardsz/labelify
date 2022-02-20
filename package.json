@@ -12,6 +12,7 @@
   "author": "jrichardsz",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.26.0",
     "bcrypt": "^5.0.1",
     "escape-html": "^1.0.3",
     "express-session": "^1.17.2",
