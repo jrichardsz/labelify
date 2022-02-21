@@ -10,14 +10,9 @@ function HomeRoute(){
   @Autowire(name="rootPath")
   this.rootPath;
 
-  @Get(path="/")
-  this.showRoot = (req, res) => {
-    res.redirect('/home');
-  }
-
-  @Get(path="/home")
+  @Get(path="/annotate")
   this.showHome = (req, res) => {
-    res.render('home.html');
+    res.render('annotate.html');
   }
 }
 
