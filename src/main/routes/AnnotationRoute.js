@@ -9,6 +9,11 @@ function AnnotationRoute() {
   @Autowire(name = "annotationDataSource")
   this.annotationDataSource;
 
+  @Get(path="/annotate")
+  this.showAnnotatePage = (req, res) => {
+    res.render('annotate.html');
+  }
+
   @Post(path = "/api/annotation")
   @Protected(permission = "annotation:create")
   this.createAnnotation = async (req, res) => {
