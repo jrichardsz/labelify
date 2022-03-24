@@ -113,3 +113,6 @@ Thanks goes to these wonderful people :
     </td>    
   </tbody>
 </table>
+
+
+Error: ER_BAD_FIELD_ERROR: Unknown column 'password' in 'field list'

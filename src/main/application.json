@@ -3,19 +3,15 @@
     "database": {
       "client": "mysql",
       "connection": {
-        "host": "${LABELIFY_DATABASE_HOST}",
-        "user": "${LABELIFY_DATABASE_USER}",
-        "password": "${LABELIFY_DATABASE_PASSWORD}",
-        "database": "${LABELIFY_DATABASE_NAME}"
+        "host": "192.168.0.22",
+        "user": "root",
+        "password": "secret",
+        "database": "game"
       }
     },
-    "session": {
-      "resave": true,
-      "saveUninitialized": true,
-      "cookie": {
-        "secure": false,
-        "maxAge": 36001000
-      }
+    "iam_oauth2_elementary_starter":{
+      "jwtSecret":"changeme",
+      "jwtExpiration":"3600s"
     }
   }
 }

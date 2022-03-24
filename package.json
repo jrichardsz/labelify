@@ -6,27 +6,23 @@
   "scripts": {
     "start": "node src/main/index.js --ignore 'meta.json'",
     "dev": "nodemon src/main/index.js --ignore 'meta.json'",
-    "test": "nyc --reporter=html --reporter=json-summary mocha  'src/test/**/ImageService.test.js' --exit",
-    "init": "nyc --reporter=html --reporter=json-summary mocha  'src/test/**/*.test.js' --exit --require mocha-suppress-logs"
+    "testv": "nyc --reporter=html --reporter=json-summary mocha  'src/test/**/ImageService.test.js' --exit",
+    "test": "nyc --reporter=html --reporter=json-summary mocha  'src/test/**/*.test.js' --exit --require mocha-suppress-logs"
   },
   "author": "jrichardsz",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.0",
-    "bcrypt": "^5.0.1",
     "escape-html": "^1.0.3",
-    "express-session": "^1.17.2",
-    "jsonwebtoken": "^8.5.1",
-    "nodeboot-database-starter": "git+https://github.com/nodeboot/nodeboot-database-starter.git#1.0.0-alpha",
-    "nodeboot-rest-starter": "git+https://github.com/nodeboot/nodeboot-rest-starter.git#1.0.1-alpha",
-    "nodemon": "^2.0.15",
-    "uuid": "^8.3.2"
+    "nodeboot-database-starter": "git+https://github.com/nodeboot/nodeboot-database-starter.git#1.0.0",
+    "nodeboot-iam-oauth2-elementary-starter": "file:../../../../../../home/jrichardsz/Github/nodeboot-iam-oauth2-elementary-starter",
+    "nodeboot-rest-starter": "file:../../../../../../home/jrichardsz/Github/nodeboot-rest-starter",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "chai": "4.2.0",
     "mocha": "8.1.3",
     "mocha-suppress-logs": "^0.3.1",
     "nyc": "^15.1.0",
-    "meta-js": "git+https://github.com/jrichardsz/meta-js.git#1.0.5-pre-alpha"
+    "meta-js": "git+https://github.com/jrichardsz/meta-js.git#1.0.6-pre-alpha"
   }
 }

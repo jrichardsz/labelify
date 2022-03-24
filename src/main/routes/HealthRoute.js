@@ -1,9 +1,6 @@
-const fs = require("fs")
-const path = require("path")
-
-@Route(name = "HealthRoute")
-
+@Route
 function HealthRoute() {
+  
   @Autowire(name = "dbSession")
   this.dbSession;
 
