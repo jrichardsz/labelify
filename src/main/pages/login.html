@@ -207,7 +207,7 @@
           if(jsonResponse.code == 200 && typeof jsonResponse.content.access_token !== 'undefined'){
             window.localStorage.setItem("access_token", jsonResponse.content.access_token);
             if(jsonResponse.content.role === "admin"){
-              window.location.href = '/admin?page=add_images';
+              window.location.href = '/admin?page=home';
             }else{
               window.location.href = '/home?uuid='+encodeURI(request.uuid);
             }

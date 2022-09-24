@@ -17,8 +17,8 @@
     "escape-html": "^1.0.3",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
-    "nodeboot-database-starter": "git+https://github.com/nodeboot/nodeboot-database-starter.git#1.0.0-alpha",
-    "nodeboot-rest-starter": "git+https://github.com/nodeboot/nodeboot-rest-starter.git#1.0.1-alpha",
+    "nodeboot-database-starter": "git+https://github.com/nodeboot/nodeboot-database-starter.git#1.0.0",
+    "nodeboot-rest-starter": "git+https://github.com/nodeboot/nodeboot-rest-starter.git#1.0.0",
     "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
   },
